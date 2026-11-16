@@ -31,7 +31,11 @@ Models run on Google Colab (T4 GPU); scoring and analysis run locally.
    derived from the training answers. `N_FEWSHOT = 8` adds training examples,
    `USE_OCR = True` adds the OCR text cached by step 2. Its last cell prints one
    table comparing every run saved for the model.
-4. Copy the prediction files into `results/` and score them:
+4. Open `notebooks/04_ocr_locator_zoom.ipynb` with the same `MODEL_ID`.
+   It uses OCR only to find where the question points, crops those regions from
+   the full-resolution image, and gives the model the whole image plus the crops.
+   `CROP_MODE = "random"` and `"grid"` are the control runs.
+5. Copy the prediction files into `results/` and score them:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
@@ -42,6 +46,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 - `viinfo/metrics.py` — scorer; `anls` matches the paper's official scorer exactly
   (checked on all 1,374 test rows), with per answer-type / element / topic breakdowns
+- `viinfo/locate.py` — OCR-as-locator: match a question to OCR boxes and pick crop windows
 - `scripts/score.py` — score prediction files
 - `notebooks/` — Colab notebooks
 
