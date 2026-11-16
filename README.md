@@ -26,7 +26,12 @@ Models run on Google Colab (T4 GPU); scoring and analysis run locally.
    It runs Vietnamese OCR (EasyOCR) on each image, adds the text to the prompt,
    and its last cell compares the result with the baseline from step 1.
    Set `MODE = "ocr_only"` for the ablation without the image.
-3. Copy the prediction files into `results/` and score them:
+3. Open `notebooks/03_answer_format_prompt.ipynb` with the same `MODEL_ID`.
+   It replaces the paper's "single term" prompt with explicit answer-format rules
+   derived from the training answers. `N_FEWSHOT = 8` adds training examples,
+   `USE_OCR = True` adds the OCR text cached by step 2. Its last cell prints one
+   table comparing every run saved for the model.
+4. Copy the prediction files into `results/` and score them:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
