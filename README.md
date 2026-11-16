@@ -22,7 +22,11 @@ Models run on Google Colab (T4 GPU); scoring and analysis run locally.
 1. Open `notebooks/01_baseline_zero_shot.ipynb` in Colab and run all cells.
    It downloads the test images itself and saves predictions to
    `MyDrive/viinfographicvqa/results/`.
-2. Copy the prediction file into `results/` and score it:
+2. Open `notebooks/02_ocr_augmented_prompt.ipynb` with the same `MODEL_ID`.
+   It runs Vietnamese OCR (EasyOCR) on each image, adds the text to the prompt,
+   and its last cell compares the result with the baseline from step 1.
+   Set `MODE = "ocr_only"` for the ablation without the image.
+3. Copy the prediction files into `results/` and score them:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
